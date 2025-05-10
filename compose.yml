@@ -1,0 +1,21 @@
+version: "3"
+services:
+  web:
+    build: .
+    image: localhost:5000/web:1.0
+    ports:
+      - "80:5000"
+    deploy:
+      replicas: 3
+    links:
+      - redis
+    networks:
+      - mynet
+  redis:
+    image: redis
+    expose:
+      - "6379"
+    networks:
+      - mynet
+networks:
+  mynet:
